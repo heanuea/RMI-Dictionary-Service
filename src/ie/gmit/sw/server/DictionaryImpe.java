@@ -1,11 +1,11 @@
 package ie.gmit.sw.server;
 
 	import java.rmi.RemoteException;
-	import java.rmi.server.RemoteObject;
+	import java.rmi.server.UnicastRemoteObject;
 	import java.util.ArrayList;
 	import java.util.HashMap;
 
-	public class DictionaryImpe  extends RemoteObject implements DictionaryService{
+	public class DictionaryImpe  extends UnicastRemoteObject implements DictionaryService{
 		
 		// serial version ID
 		private static final long serialVersionUID = 1L;
@@ -14,7 +14,8 @@ package ie.gmit.sw.server;
 		
 	
 		//method 
-		public void DictionaryService() throws Exception, RemoteException{
+		public DictionaryImpe() throws Exception, RemoteException{
+			super();
 			ap = new DictionaryHashMap();
 			ap.csvRead();
 			HashMap = ap.getDictionary();

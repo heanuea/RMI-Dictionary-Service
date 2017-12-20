@@ -17,9 +17,11 @@ public class DictionaryServiceServer {
 
 		// Bind our remote object to the registry with the human-readable name
 		// "fileService"
-		Naming.rebind("dictionaryService", ds);
+		Naming.rebind("dictionaryImpe", ds);
 
 		// Print a message to standard output
 		System.out.println("Server ready.");
-	}//end main
+	// testing server
+		//ds.search("dog"m);
+	}//end main6
 }//end class

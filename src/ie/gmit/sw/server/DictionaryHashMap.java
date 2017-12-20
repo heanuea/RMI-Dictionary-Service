@@ -35,9 +35,9 @@ public class DictionaryHashMap {
 
 			if ("\"".equals(charCheck)) {
 				key = keyString[0];
-				addDefinition(key.toUpperCase(), line);
+								addDefinition(key.toUpperCase(), line);
 			} else {
-				addDefinition(key.toUpperCase(), line);
+						addDefinition(key.toUpperCase(), line);
 			}
 
 		} // while
@@ -46,6 +46,7 @@ public class DictionaryHashMap {
 
 	}// endloop
 
+	
 	// method here to add defition to dictionary
 	private void addDefinition(String key, String definition) {
 		if (dictMap.get(key) == null) {
@@ -54,6 +55,7 @@ public class DictionaryHashMap {
 		dictMap.get(key).add("\n" + definition);
 	}
 
+	
 	// Return the hashmap when requested in another class
 	public HashMap<String, ArrayList<String>> getDictionary() {
 		return this.dictMap;
