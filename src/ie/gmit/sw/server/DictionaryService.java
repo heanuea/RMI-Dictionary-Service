@@ -1,17 +1,11 @@
 package ie.gmit.sw.server;
 
-//imported rmi 
 import java.rmi.*;
 
-/**
- * 
- * @author Alan Heanue
- *
- */
+//In this we created interface  and method search()
+//remote interface have to extend the interface java.rmi.Remote 
+public interface DictionaryService extends Remote {
+	
+	public void search(String Word) throws RemoteException;
 
-//Interface must be public 
-public interface DictionaryService extends Remote{
-
-	//all methods described in the 
-	public String wordSearch(String Word) throws RemoteException;
 }
