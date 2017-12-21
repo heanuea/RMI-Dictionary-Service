@@ -13,7 +13,13 @@ public class RequestCall {
 		this.taskNo = taskNo;
 	}//end constructor
 	
-//source gets and sets
+
+	public RequestCall(int giveID, String parameter) {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	//source gets and sets
 	public String getWord() {
 		return word;
 	}

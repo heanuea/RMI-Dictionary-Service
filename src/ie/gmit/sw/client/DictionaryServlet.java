@@ -1,7 +1,10 @@
 package ie.gmit.sw.client;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,46 +13,60 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class DictionaryServlet
+ *  implementation class DictionaryServlet
  */
-@WebServlet("/DictionaryServlet")
+@WebServlet(asyncSupported = true, urlPatterns = { "/DictionaryServlet" })
 public class DictionaryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private BlockingQueue<RequestCall> inQueue = new ArrayBlockingQueue<RequestCall>(10);
+    private int giveID; 
+    private String search = null;
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DictionaryServlet() {
+        super();
+    }
 
 	/**
-	 * Default constructor.
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public DictionaryServlet() {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		giveID++;
+		RequestCall j = new RequestCall(giveID, request.getParameter("word"));
 		
-		// TODO Auto-generated constructor stub
-	}
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response, String res)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append(res);
-	}
-
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+		try
+		{
+			inQueue.put(j);
+		} 
 		
-		InQueue r = new InQueue(request.getParameter("word"));
-		new Thread(r).start();
-		
-		PrintWriter out = response.getWriter();		// for debugging...
-		//out.println(r.hashCode());				// double checking hashcode of thread (debugging)		
-		try {
-			Thread.sleep(10000);					// simulate a wait...?
-			String res = r.getResponse();			// get the response from our thread
-			//out.println(res.toString());
-			doGet(request, response, res);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+		catch (InterruptedException e) 
+		{
 			e.printStackTrace();
-		}// try catch
-	}// post
+		}
+		System.out.println(giveID);
+		String word = request.getParameter("word");
+		try
+		{
+			DictionaryService ds = (DictionaryService) Naming.lookup("rmi://127.0.0.1:1099/dictionaryService");
+			search = ds.search(word);
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		request.setAttribute("word", word);
+		request.setAttribute("definition", search);
+		javax.servlet.RequestDispatcher rd=request.getRequestDispatcher("/response.jsp");
+		rd.forward(request, response);
+	}
 
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 
 }

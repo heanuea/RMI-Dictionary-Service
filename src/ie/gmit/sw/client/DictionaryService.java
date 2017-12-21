@@ -6,6 +6,6 @@ import java.rmi.*;
 //remote interface have to extend the interface java.rmi.Remote 
 public interface DictionaryService extends Remote {
 	
-	public void search(String Word) throws RemoteException;
+	public String search(String word) throws RemoteException;
 
 }
