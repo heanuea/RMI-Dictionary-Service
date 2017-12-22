@@ -16,9 +16,13 @@
 			type="submit" value="submit"><br>
 
 	</form>
-	<form action="DictionaryServlet" method="get">
-		<h2>${message}</h2>
-	</form>
+		<form action="DictionaryServlet" method="get">
+			<div class="def">
+				<h3><%= request.getParameter("message") %></h3>
+			</div>
+		</form>
+	
+	
 </body>
 </html>
 

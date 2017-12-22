@@ -55,10 +55,12 @@ public class DictionaryHashMap {
 		dictMap.get(key).add("\n" + definition);
 	}
 
+
 	
 	// Return the hashmap when requested in another class
 	public HashMap<String, ArrayList<String>> getDictionary() {
 		return this.dictMap;
 	}
+	
 
 }// end class
