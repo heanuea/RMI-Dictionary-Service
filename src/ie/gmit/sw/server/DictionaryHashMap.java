@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+/**
+ * Author Alan Heanue
+ */
+
 
 public class DictionaryHashMap {
 
@@ -36,19 +40,28 @@ public class DictionaryHashMap {
 			if ("\"".equals(charCheck)) {
 				key = keyString[0];
 								addDefinition(key.toUpperCase(), line);
-			} else {
-						addDefinition(key.toUpperCase(), line);
 			}
+			
+			else 
+			{
+						addDefinition(key.toUpperCase(), line);
+			}//end else
 
 		} // while
 
+		
 		br.close();
+		
 
 	}// endloop
 
 	
+	
+	
 	// method here to add defition to dictionary
-	private void addDefinition(String key, String definition) {
+	private void addDefinition(String key, String definition) 
+	
+	{
 		if (dictMap.get(key) == null) {
 			dictMap.put(key, new ArrayList<String>());
 		}

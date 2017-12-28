@@ -12,5 +12,8 @@ public class Worker {
 		Naming.rebind("dictionaryService", stub); // add the dictionary service to the lookup table
 	
 		System.out.println("Server " + stub + " Ready");
+		
 	}// main
+	
 }// class
+
