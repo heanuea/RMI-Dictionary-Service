@@ -44,7 +44,6 @@ Here we look at the some of the Tech Used in this project
 
 - Eclipse java EE
 - TomCat Server 9 
--
 
 ## **_Features I Used in App_**
 
@@ -220,11 +219,6 @@ public class DictionaryServiceServer extends HttpServlet {
 
 - run java -jar dictionary-service.jar
 
-- next add the job-server.war to the webapps directory of your Apache Tomcat (Built using v9.0)
-
-- start the apache tomcat server
-
-- now visit 127.0.0.1:8080/Home
 
 ### **_Conclusion_**
 Creating this app was frustrating at times i did learn and got a better understanding how RMI works and how servlets worked o wish i had started ealier so i could have added more features but overall i found this module interesting. 
